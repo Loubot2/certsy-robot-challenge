@@ -1,0 +1,2 @@
+class RobotPosition < ApplicationRecord
+end
