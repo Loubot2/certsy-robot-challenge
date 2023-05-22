@@ -46,6 +46,6 @@ class API::V1::RobotPositionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def robot_position_params
-      params.require(:robot_position).permit(:x, :y, :facing)
+      params.require(:robot_position).permit(:x, :y, :orientation)
     end
 end

@@ -1,14 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import  App  from './App';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import App from './App';
+import theme from './theme';
 
-console.log('index');
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement!);
 
-//TODO: fix react 18 warning
-//https://react.dev/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis
-ReactDOM.render(
-  <React.StrictMode>
-      <App></App>
-  </React.StrictMode>,
-  document.getElementById('root'),
+root.render(
+  <ThemeProvider theme={theme}>
+    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+    <CssBaseline />
+    <App />
+  </ThemeProvider>,
 );

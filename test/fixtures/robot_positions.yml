@@ -3,9 +3,9 @@
 one:
   x: 1
   'y': 1
-  facing: MyString
+  orientation: NORTH
 
 two:
   x: 1
   'y': 1
-  facing: MyString
+  orientation: SOUTH

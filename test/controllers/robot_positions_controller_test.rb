@@ -12,7 +12,7 @@ class RobotPositionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create robot_position" do
     assert_difference("RobotPosition.count") do
-      post robot_positions_url, params: { robot_position: { facing: @robot_position.facing, x: @robot_position.x, y: @robot_position.y } }, as: :json
+      post robot_positions_url, params: { robot_position: { orientation: @robot_position.orientation, x: @robot_position.x, y: @robot_position.y } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class RobotPositionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update robot_position" do
-    patch robot_position_url(@robot_position), params: { robot_position: { facing: @robot_position.facing, x: @robot_position.x, y: @robot_position.y } }, as: :json
+    patch robot_position_url(@robot_position), params: { robot_position: { orientation: @robot_position.orientation, x: @robot_position.x, y: @robot_position.y } }, as: :json
     assert_response :success
   end
 

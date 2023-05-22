@@ -6,14 +6,19 @@
 // }
 
 export enum Facing  {
-  NORTH, 
-  EAST, 
-  SOUTH, 
-  WEST
+  NORTH = "NORTH", 
+  EAST = "EAST", 
+  SOUTH = "SOUTH", 
+  WEST = "WEST", 
 }
 
-export type Robot =  {
+export type RobotPosition =  {
   x: number;
   y: number;
-  facing: Facing;
+  orientation: Facing;
+}
+
+export type Table =  {
+  length: number;
+  width: number;
 }
