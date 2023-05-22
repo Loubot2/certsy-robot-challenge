@@ -3,6 +3,7 @@ import  { RobotPosition } from './types'
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
+import Table from '@mui/material/Table';
 
 type TableProps = {
   robot?: RobotPosition
@@ -26,10 +27,9 @@ const TableRow = ({y, columns, key, robot}: {y: number, key: string, columns: nu
   return <Grid key={rowKey} spacing={2}className="board-row">{itemList}</Grid>;
 };
 
-const Table = ({robot}: TableProps) => {
+const GameTable = ({robot}: TableProps) => {
   const columns = 5;
   const rows = 5;
-  console.log('Hello Table');
   let rowsArry = [];
   let i = 0;
   for (i; i < rows; i++) rowsArry.push(i);
@@ -39,9 +39,9 @@ const Table = ({robot}: TableProps) => {
   }
   );
   return (
-  <Container>
+  <Table>
     {itemList}
-  </Container>
+  </Table>
 )};
 
-export default Table;
+export default GameTable;

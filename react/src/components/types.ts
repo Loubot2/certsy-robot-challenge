@@ -1,10 +1,3 @@
-// enum Direction {
-//   Up,
-//   Down,
-//   Left,
-//   Right,
-// }
-
 export enum Facing  {
   NORTH = "NORTH", 
   EAST = "EAST", 

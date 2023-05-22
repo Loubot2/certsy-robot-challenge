@@ -2,14 +2,14 @@ import React, {useState} from "react";
 import  { RobotPosition } from './types'
 import Container from '@mui/material/Container';
 import TextControl from './TextControl';
-import {executeInstructions} from './Robot'
+import {executeInstructions} from './Robot';
+import GameTable from './GameTable';
 
 const Game = () => {
   const [output, setOutput] = useState<RobotPosition[]>([]);
   const [robot, setRobot] = useState<RobotPosition | undefined>(undefined);
 
   const onExecute = (instructions: string) => {
-    console.log(instructions);
     let updatedOutput = [...output];
     const robotOutput = executeInstructions({instructions: instructions.split('\n'), table: {width: 5, length: 5}, robot, reportOutput: updatedOutput});
     setRobot(robotOutput);
@@ -35,6 +35,8 @@ const Game = () => {
 
 
         {outputList}
+
+        <GameTable />
   </Container>
 )};
 

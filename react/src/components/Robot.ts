@@ -16,29 +16,102 @@ export const executeInstructions =  ({instructions, table, robot: robotInput, re
       if(command.length > 1 && action === 'PLACE') {
         robot = placeRobot(command[1], table);
       }
-      //REPORT will announce the X,Y and orientation of the robot.
-      if(robot && action === 'REPORT') {
-        reportRobot(robot, reportOutput);
-      }
-
-      // MOVE will move the toy robot one unit forward in the direction it is currently facing.
-      if(robot && action === 'MOVE') {
-        console.log('Move Robot', instuction);
-        robot = moveRobot(robot, table);
+      if(robot) {
+        switch (action) {
+          case 'REPORT': {
+            reportRobot(robot, reportOutput);
+            break;
+          }
+          case 'MOVE': {
+            robot = moveRobot(robot, table);
+            break;
+          }
+          case 'LEFT': {
+            robot = turnRobotLeft(robot);
+            break;
+          }
+          case 'RIGHT': {
+            break;
+        }
+        }
       }
     }
   });
   return robot;
 };
 
-//TODO: valididate robot placement
-export const placeRobot =  (command: string, table: Table): RobotPosition => {
+export const placeRobot =  (command: string, table: Table): RobotPosition | undefined => {
  const location = command.split(',');
-  console.log('place Robot', location);
   const typedFacingString = location[2] as keyof typeof Facing;
   const x = Number.parseInt(location[0]);
   const y = Number.parseInt(location[1]);
   const orientation = Facing[typedFacingString];
+  const valid = !!orientation && x >= 0 && y >= 0 && x < table.width && y < table.length;
+  if(valid) {
+    return {
+      x,
+      y,
+      orientation,
+    };
+  }
+};
+
+
+export const reportRobot =  (robot: RobotPosition, reportOutput: RobotPosition[]) => {
+  reportOutput.push({
+    x: robot.x,
+    y: robot.y,
+    orientation: robot.orientation,
+  })
+};
+
+export const turnRobotRight =  (robot: RobotPosition): RobotPosition => {
+  let {x,y,orientation} = robot;
+  switch (orientation) {
+    case Facing.NORTH: {
+      orientation = Facing.EAST
+      break;
+    }
+    case Facing.EAST: {
+      orientation = Facing.SOUTH
+      break;
+    }
+    case Facing.SOUTH: {
+      orientation = Facing.WEST
+      break;
+    }
+    case Facing.WEST: {
+      orientation = Facing.NORTH
+      break;
+    }
+  }
+  return {
+    x,
+    y,
+    orientation,
+  };
+};
+
+export const turnRobotLeft =  (robot: RobotPosition): RobotPosition => {
+  let {x,y,orientation} = robot;
+  switch (orientation) {
+    case Facing.NORTH: {
+      orientation = Facing.WEST
+      break;
+    }
+    case Facing.SOUTH: {
+      orientation = Facing.EAST
+      break;
+    }
+    case Facing.EAST: {
+      orientation = Facing.NORTH
+      break;
+    }
+    case Facing.WEST: {
+      orientation = Facing.SOUTH
+      break;
+    }
+  }
   return {
     x,
     y,
@@ -47,33 +120,25 @@ export const placeRobot =  (command: string, table: Table): RobotPosition => {
 };
 
 
-export const reportRobot =  (robot: RobotPosition, reportOutput: RobotPosition[]) => {
-  console.log('Report Robot', robot);
-  reportOutput.push({
-    x: robot.x,
-    y: robot.y,
-    orientation: robot.orientation,
-  })
-};
-
-
 export const moveRobot =  (robot: RobotPosition, table: Table): RobotPosition => {
+  // x axis is east, west
+  // y axis is north, south
   let {x,y,orientation} = robot;
   switch (orientation) {
     case Facing.NORTH: {
-      if(x < table.length) x++;
+      if(y < table.length - 1) y++;
       break;
     }
     case Facing.SOUTH: {
-      if(x > 0) x--;
+      if(y > 0) y--;
       break;
     }
     case Facing.EAST: {
-      if(y < table.width) y++;
+      if(x < table.width - 1) x++;
       break;
     }
     case Facing.WEST: {
-      if(y > 0) y--;
+      if(x > 0) x--;
       break;
     }
   }
