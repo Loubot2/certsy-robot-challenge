@@ -36,7 +36,7 @@ const Game = () => {
 
         {outputList}
 
-        <GameTable />
+        <GameTable robot={robot}/>
   </Container>
 )};
 

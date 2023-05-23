@@ -24,14 +24,14 @@ const TextControl = ({onExecute, onClear}: TableProps) => {
         </ul>
 
       </Box>
-    <FormControl>
+      
       <InputLabel id="demo-simple-select-label">Instructions</InputLabel>
+    <FormControl>
       <TextareaAutosize 
       minRows={10}
       id="commands"
       onChange={(e) => {
         if(instructions !== e.target.value) {
-          console.log('setInstructions', e.target.value);
           setInstructions(e.target.value);
         }
       }}
