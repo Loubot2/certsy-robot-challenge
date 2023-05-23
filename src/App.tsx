@@ -1,6 +1,6 @@
-import React from 'react';
-import Game from "./components/Game";
-import Container from '@mui/material/Container';
+import React from 'react'
+import Game from './components/Game'
+import Container from '@mui/material/Container'
 
 const App = () => {
   return (
@@ -11,7 +11,7 @@ const App = () => {
         </p>
       <Game />
     </Container>
-  );
+  )
 }
 
-export default App;
+export default App

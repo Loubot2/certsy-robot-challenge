@@ -1,150 +1,171 @@
-import { Facing, RobotPosition, Table } from "./types";
+import { Facing, type RobotPosition, type Table } from './types'
 
-type RobotInput = {
-  instructions: string[];
-  reportOutput: RobotPosition[];
-  table: Table;
+interface RobotInput {
+  instructions: string[]
+  errorOutput: string[]
+  reportOutput: RobotPosition[]
+  table: Table
   robot?: RobotPosition
 }
 
-export const executeInstructions =  ({instructions, table, robot: robotInput, reportOutput}: RobotInput): RobotPosition | undefined => {
-  let robot: RobotPosition = robotInput;
+export const executeInstructions = ({ instructions, table, robot: robotInput, reportOutput, errorOutput }: RobotInput): RobotPosition | undefined => {
+  let robot: RobotPosition = robotInput
   instructions.forEach((instuction: string) => {
-    const command = instuction.split(' ');
-    if(command.length > 0) {
-      const action = command[0];
-      if(command.length > 1 && action === 'PLACE') {
-        robot = placeRobot(command[1], table);
+    robot = executeInstruction({
+      instuction,
+      robotInput: robot,
+      table,
+      errorOutput,
+      reportOutput
+    })
+  })
+  return robot
+}
+
+const executeInstruction = ({ instuction, robotInput, table, errorOutput, reportOutput }: { instuction: string, robotInput: RobotPosition | undefined, errorOutput: string[]
+  reportOutput: RobotPosition[], table: Table }): RobotPosition | undefined => {
+  let robot: RobotPosition = robotInput
+  try {
+    const command = instuction.split(' ')
+    if (command.length > 0) {
+      const action = command[0]
+      if (action === 'PLACE') {
+        if (command.length > 1) {
+          robot = placeRobot(command[1], table)
+        } else {
+          errorOutput.push('Place instructions missing')
+        }
       }
-      if(robot) {
+      if (robot) {
         switch (action) {
           case 'REPORT': {
-            reportRobot(robot, reportOutput);
-            break;
+            reportRobot(robot, reportOutput)
+            break
           }
           case 'MOVE': {
-            robot = moveRobot(robot, table);
-            break;
+            robot = moveRobot(robot, table)
+            break
           }
           case 'LEFT': {
-            robot = turnRobotLeft(robot);
-            break;
+            robot = turnRobotLeft(robot)
+            break
           }
           case 'RIGHT': {
-            break;
-        }
+            robot = turnRobotRight(robot)
+            break
+          }
         }
       }
     }
-  });
-  return robot;
-};
+  } catch (error) {
+    errorOutput.push(error)
+  }
+  return robot
+}
 
-export const placeRobot =  (command: string, table: Table): RobotPosition | undefined => {
- const location = command.split(',');
-  const typedFacingString = location[2] as keyof typeof Facing;
-  const x = Number.parseInt(location[0]);
-  const y = Number.parseInt(location[1]);
-  const orientation = Facing[typedFacingString];
-  const valid = !!orientation && x >= 0 && y >= 0 && x < table.width && y < table.length;
-  if(valid) {
+export const placeRobot = (command: string, table: Table): RobotPosition | undefined => {
+  const location = command.split(',')
+  const typedFacingString = location[2] as keyof typeof Facing
+  const x = Number.parseInt(location[0])
+  const y = Number.parseInt(location[1])
+  const orientation = Facing[typedFacingString]
+  const valid = !!orientation && x >= 0 && y >= 0 && x < table.width && y < table.length
+  if (valid) {
     return {
       x,
       y,
-      orientation,
-    };
-  }
-};
+      orientation
+    }
+  } else throw 'Invalid Placement Command'
+}
 
-
-export const reportRobot =  (robot: RobotPosition, reportOutput: RobotPosition[]) => {
+export const reportRobot = (robot: RobotPosition, reportOutput: RobotPosition[]) => {
   reportOutput.push({
     x: robot.x,
     y: robot.y,
-    orientation: robot.orientation,
+    orientation: robot.orientation
   })
-};
+}
 
-export const turnRobotRight =  (robot: RobotPosition): RobotPosition => {
-  let {x,y,orientation} = robot;
+export const turnRobotRight = (robot: RobotPosition): RobotPosition => {
+  let { x, y, orientation } = robot
   switch (orientation) {
     case Facing.NORTH: {
       orientation = Facing.EAST
-      break;
+      break
     }
     case Facing.EAST: {
       orientation = Facing.SOUTH
-      break;
+      break
     }
     case Facing.SOUTH: {
       orientation = Facing.WEST
-      break;
+      break
     }
     case Facing.WEST: {
       orientation = Facing.NORTH
-      break;
+      break
     }
   }
   return {
     x,
     y,
-    orientation,
-  };
-};
+    orientation
+  }
+}
 
-export const turnRobotLeft =  (robot: RobotPosition): RobotPosition => {
-  let {x,y,orientation} = robot;
+export const turnRobotLeft = (robot: RobotPosition): RobotPosition => {
+  let { x, y, orientation } = robot
   switch (orientation) {
     case Facing.NORTH: {
       orientation = Facing.WEST
-      break;
+      break
     }
     case Facing.SOUTH: {
       orientation = Facing.EAST
-      break;
+      break
     }
     case Facing.EAST: {
       orientation = Facing.NORTH
-      break;
+      break
     }
     case Facing.WEST: {
       orientation = Facing.SOUTH
-      break;
+      break
     }
   }
   return {
     x,
     y,
-    orientation,
-  };
-};
+    orientation
+  }
+}
 
-
-export const moveRobot =  (robot: RobotPosition, table: Table): RobotPosition => {
+export const moveRobot = (robot: RobotPosition, table: Table): RobotPosition => {
   // x axis is east, west
   // y axis is north, south
-  let {x,y,orientation} = robot;
+  let { x, y, orientation } = robot
   switch (orientation) {
     case Facing.NORTH: {
-      if(y < table.length - 1) y++;
-      break;
+      if (y < table.length - 1) y++
+      break
     }
     case Facing.SOUTH: {
-      if(y > 0) y--;
-      break;
+      if (y > 0) y--
+      break
     }
     case Facing.EAST: {
-      if(x < table.width - 1) x++;
-      break;
+      if (x < table.width - 1) x++
+      break
     }
     case Facing.WEST: {
-      if(x > 0) x--;
-      break;
+      if (x > 0) x--
+      break
     }
   }
   return {
     x,
     y,
-    orientation,
-  };
-};
+    orientation
+  }
+}
