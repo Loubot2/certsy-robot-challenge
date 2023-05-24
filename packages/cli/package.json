@@ -2,7 +2,7 @@
   "name": "@toy-robot/cli",
   "version": "0.1.0",
   "private": true,
-  "main": "./dist/src/cli/commandline.js",
+  "main": "./dist/commandline.js",
   "dependencies": {
     "@toy-robot/core": "^1.0.0",
     "boxen": "4.0",
@@ -38,6 +38,6 @@
     "typescript": "^5.0.4"
   },
   "bin": {
-    "toy-robot": ".\\dist\\src\\cli\\commandline.js"
+    "toy-robot": ".\\dist\\commandline.js"
   }
 }
