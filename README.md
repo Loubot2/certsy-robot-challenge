@@ -2,9 +2,18 @@
 
 This project requires Node to run
 
+## Setup
+npm ci
+npm run build --workspaces --if-present
+npm run start --workspaces --if-present
+
 ## Available Scripts
 
 In the project directory, you can run:
+### `npm cli`
+
+Runs the app in command line
+
 
 ### `npm start`
 
@@ -25,6 +34,3 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified .\
 Your app is ready to be deployed!
-
-### TODO:
-Add s3 or docker build

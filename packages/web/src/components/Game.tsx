@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { type RobotPosition } from './types'
+import { type RobotPosition } from '@toy-robot/core'
 import { Container, Alert } from '@mui/material'
 import TextControl from './TextControl'
-import { executeInstructions } from './Robot'
+import { executeInstructions } from '@toy-robot/core'
 import GameTable from './GameTable'
 
 const Game = () => {

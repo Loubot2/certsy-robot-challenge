@@ -1,4 +1,4 @@
-import { placeRobot, executeInstructions, moveRobot, turnRobotRight, turnRobotLeft } from './Robot'
+import { placeRobot, executeInstructions, moveRobot, turnRobotRight, turnRobotLeft } from './robot'
 import { Facing, type RobotPosition, type Table } from './types'
 
 describe('Robot', () => {

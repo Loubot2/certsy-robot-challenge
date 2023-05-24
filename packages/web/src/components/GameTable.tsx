@@ -1,5 +1,5 @@
 import React from 'react'
-import { type RobotPosition } from './types'
+import { type RobotPosition } from '@toy-robot/core'
 import SmartToyIcon from '@mui/icons-material/SmartToy'
 import { Table, TableContainer, Paper, TableRow, TableCell, TableBody } from '@mui/material'
 
