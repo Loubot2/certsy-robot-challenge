@@ -1,4 +1,4 @@
-import { Facing, RobotPosition, Table } from './types'
+import { Facing, type RobotPosition, type Table } from './types'
 
 interface RobotInput {
   instructions: string[]
@@ -12,62 +12,62 @@ export const executeInstructions = ({ instructions, table, robot: robotInput, re
   let robot: RobotPosition | undefined = robotInput
   instructions.forEach((instruction: string) => {
     try {
-    robot = executeInstruction({
-      instruction,
-      robotInput: robot,
-      table,
-      reportOutput
-    });
-  } catch (error) {
-    errorOutput.push(error as string)
-  }
+      robot = executeInstruction({
+        instruction,
+        robotInput: robot,
+        table,
+        reportOutput
+      })
+    } catch (error) {
+      errorOutput.push(error as string)
+    }
   })
   return robot
 }
 
-export const executeInstruction = ({ instruction, robotInput, table, reportOutput }: { instruction: string, robotInput: RobotPosition | undefined,
+export const executeInstruction = ({ instruction, robotInput, table, reportOutput }: { instruction: string, robotInput: RobotPosition | undefined
   reportOutput: RobotPosition[], table: Table }): RobotPosition | undefined => {
-    let robot: RobotPosition | undefined = robotInput
-    const command = instruction.split(' ');
-    const action = command[0];
-    if (action === 'REPORT') {
-      reportRobot(robot, reportOutput)
-    } else {
-      return executeRobotPosition({ instruction, robotInput, table });
+  const robot: RobotPosition | undefined = robotInput
+  const command = instruction.split(' ')
+  const action = command[0]
+  if (action === 'REPORT') {
+    reportRobot(robot, reportOutput)
+  } else {
+    return executeRobotPosition({ instruction, robotInput, table })
   }
   return robot
 }
 
-export const executeRobotPosition = ({ instruction, robotInput, table }: { instruction: string, robotInput: RobotPosition | undefined,
-   table: Table }): RobotPosition | undefined => {
+export const executeRobotPosition = ({ instruction, robotInput, table }: { instruction: string, robotInput: RobotPosition | undefined
+  table: Table }): RobotPosition | undefined => {
   let robot: RobotPosition | undefined = robotInput
-    const command = instruction.split(' ')
-    if (command.length > 0) {
-      const action = command[0]
-      if (action === 'PLACE') {
-        if (command.length > 1) {
-          robot = placeRobot(command[1], table)
-        } else {
-          throw 'Place instructions missing'
-        }
+  const command = instruction.split(' ')
+  if (command.length > 0) {
+    const action = command[0]
+    if (action === 'PLACE') {
+      if (command.length > 1) {
+        robot = placeRobot(command[1], table)
+      } else {
+        throw 'Place instructions missing'
       }
-      if (robot) {
-        switch (action) {
-          case 'MOVE': {
-            robot = moveRobot(robot, table)
-            break
-          }
-          case 'LEFT': {
-            robot = turnRobotLeft(robot)
-            break
-          }
-          case 'RIGHT': {
-            robot = turnRobotRight(robot)
-            break
-          }
+    }
+    if (robot) {
+      switch (action) {
+        case 'MOVE': {
+          robot = moveRobot(robot, table)
+          break
+        }
+        case 'LEFT': {
+          robot = turnRobotLeft(robot)
+          break
+        }
+        case 'RIGHT': {
+          robot = turnRobotRight(robot)
+          break
         }
       }
     }
+  }
   return robot
 }
 
@@ -88,7 +88,7 @@ export const placeRobot = (command: string, table: Table): RobotPosition | undef
 }
 
 export const reportRobot = (robot: RobotPosition | undefined, reportOutput: RobotPosition[]) => {
-  if(robot) {
+  if (robot) {
     reportOutput.push({
       x: robot.x,
       y: robot.y,

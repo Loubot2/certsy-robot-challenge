@@ -1,9 +1,8 @@
 import { placeRobot, executeInstructions, moveRobot, turnRobotRight, turnRobotLeft } from './robot'
-import { Facing, RobotPosition, Table } from './types'
+import { Facing, type RobotPosition, type Table } from './types'
 
 describe('Robot', () => {
-
-  const table: Table  = {
+  const table: Table = {
     length: 5,
     width: 5
   }
@@ -81,7 +80,7 @@ describe('Robot', () => {
     })
 
     test('moveRobot north out of bounds', () => {
-      const southRobot :RobotPosition = {
+      const southRobot: RobotPosition = {
         orientation: Facing.NORTH,
         x: 4,
         y: 4

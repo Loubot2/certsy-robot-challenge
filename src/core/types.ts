@@ -5,13 +5,13 @@ export enum Facing {
   WEST = 'WEST',
 }
 
-export type RobotPosition = {
-  x: number;
-  y: number;
-  orientation: Facing;
+export interface RobotPosition {
+  x: number
+  y: number
+  orientation: Facing
 }
 
-export type Table = {
-  length: number;
-  width: number;
+export interface Table {
+  length: number
+  width: number
 }
