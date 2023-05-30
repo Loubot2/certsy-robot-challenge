@@ -22,3 +22,4 @@ npm-debug.log*
 dist
 bin
 tsconfig.tsbuildinfo
+.prompt_hist.txt
