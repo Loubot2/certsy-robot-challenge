@@ -1,7 +1,7 @@
 # Certsy Toy Robot challenge
 Code is split in to 3 parts. 
 ### cli
-project for calling the cli
+logic for calling the cli
 ### core
 contains the main logic
 ### web
@@ -12,18 +12,17 @@ contains the ui this uses react
 This project requires Node to run
 
 ## Setup
-npm ci
-npm run compile
+### `npm ci`
+install libs
+
+### `npm run compile`
+compile tsc
 
 ## To start CLI
 
-npm run build-cli
-npm run start-cli
+### `npm run start-cli`
 
 Runs the app in command line
-
-### `npm run build-cli`
-Install the cli as a node package
 
 ## TO START UI
 ### `npm start`
@@ -38,6 +37,8 @@ You may also see any lint errors in the console.
 
 Launches the tests
 
+## to build
+
 ### `npm run build`
 Runs webpack in production mode
 Builds the app for production to the `dist` folder.\
@@ -45,3 +46,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified .\
 Your app is ready to be deployed!
+
+
+
+### `npm run build-cli`
+Install the cli as a node package
