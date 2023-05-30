@@ -1,20 +1,31 @@
+# Certsy Toy Robot challenge
+Code is split in to 3 parts. 
+### cli
+project for calling the cli
+### core
+contains the main logic
+### web
+contains the ui this uses react
+
 # Getting Started with Toy Robot
 
 This project requires Node to run
 
 ## Setup
 npm ci
-npm run build --workspaces --if-present
-npm run start --workspaces --if-present
+npm run compile
 
-## Available Scripts
+## To start CLI
 
-In the project directory, you can run:
-### `npm cli`
+npm run build-cli
+npm run start-cli
 
 Runs the app in command line
 
+### `npm run build-cli`
+Install the cli as a node package
 
+## TO START UI
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -28,7 +39,7 @@ You may also see any lint errors in the console.
 Launches the tests
 
 ### `npm run build`
-Runs webpack in production ode
+Runs webpack in production mode
 Builds the app for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 

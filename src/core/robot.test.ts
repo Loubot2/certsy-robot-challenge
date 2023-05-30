@@ -1,13 +1,15 @@
 import { placeRobot, executeInstructions, moveRobot, turnRobotRight, turnRobotLeft } from './robot'
-import { Facing, type RobotPosition, type Table } from './types'
+import { Facing, RobotPosition, Table } from './types'
 
 describe('Robot', () => {
-  const table: Table = {
+
+  const table: Table  = {
     length: 5,
     width: 5
   }
+
   test('executeInstructions', () => {
-    const instructions: string[] = ['PLACE 0,0,NORTH',
+    const instructions = ['PLACE 0,0,NORTH',
       'MOVE',
       'REPORT']
     expect(executeInstructions({
@@ -21,7 +23,7 @@ describe('Robot', () => {
       y: 1
     })
 
-    const instructionsMoveLeft: string[] = ['PLACE 0,0,NORTH',
+    const instructionsMoveLeft = ['PLACE 0,0,NORTH',
       'LEFT',
       'REPORT']
     expect(executeInstructions({
@@ -35,7 +37,7 @@ describe('Robot', () => {
       y: 0
     })
 
-    const instructionsMoveComplex: string[] = ['PLACE 1,2,EAST',
+    const instructionsMoveComplex = ['PLACE 1,2,EAST',
       'MOVE',
       'MOVE',
       'LEFT',
@@ -56,11 +58,7 @@ describe('Robot', () => {
 
   describe('placeRobot', () => {
     test('should placeRobot successfully', () => {
-      const command: string = '1,0,SOUTH'
-      const table: Table = {
-        length: 5,
-        width: 5
-      }
+      const command = '1,0,SOUTH'
       expect(placeRobot(command, table)).toEqual({
         orientation: 'SOUTH',
         x: 1,
@@ -70,7 +68,7 @@ describe('Robot', () => {
   })
   describe('moveRobot', () => {
     test('moveRobot north', () => {
-      const southRobot: RobotPosition = {
+      const southRobot = {
         orientation: Facing.NORTH,
         x: 1,
         y: 1
@@ -83,7 +81,7 @@ describe('Robot', () => {
     })
 
     test('moveRobot north out of bounds', () => {
-      const southRobot: RobotPosition = {
+      const southRobot :RobotPosition = {
         orientation: Facing.NORTH,
         x: 4,
         y: 4
@@ -96,7 +94,7 @@ describe('Robot', () => {
     })
 
     test('moveRobot east', () => {
-      const southRobot: RobotPosition = {
+      const southRobot = {
         orientation: Facing.EAST,
         x: 1,
         y: 1
@@ -109,7 +107,7 @@ describe('Robot', () => {
     })
 
     test('moveRobot south', () => {
-      const southRobot: RobotPosition = {
+      const southRobot = {
         orientation: Facing.SOUTH,
         x: 1,
         y: 1
@@ -122,7 +120,7 @@ describe('Robot', () => {
     })
 
     test('moveRobot west', () => {
-      const southRobot: RobotPosition = {
+      const southRobot = {
         orientation: Facing.WEST,
         x: 1,
         y: 1
@@ -136,7 +134,7 @@ describe('Robot', () => {
   })
 
   test('turnRobotLeft', () => {
-    const robot: RobotPosition = {
+    const robot = {
       orientation: Facing.NORTH,
       x: 1,
       y: 0
@@ -149,7 +147,7 @@ describe('Robot', () => {
   })
 
   test('turnRobotRight', () => {
-    const robot: RobotPosition = {
+    const robot = {
       orientation: Facing.NORTH,
       x: 1,
       y: 0

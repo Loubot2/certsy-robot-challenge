@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { type RobotPosition } from '@toy-robot/core'
+import { RobotPosition, executeInstructions } from '../../core'
 import { Container, Alert } from '@mui/material'
 import TextControl from './TextControl'
-import { executeInstructions } from '@toy-robot/core'
 import GameTable from './GameTable'
 
 const Game = () => {
@@ -26,7 +25,7 @@ const Game = () => {
   }
 
   const outputList = output.map((robotPosition: RobotPosition) => {
-    return <div>{robotPosition.y},{robotPosition.x} {robotPosition.orientation}</div>
+    return <div>{robotPosition.y},{robotPosition.x},{robotPosition.orientation}</div>
   })
   let error: JSX.Element | undefined
   if (errors.length > 0) {

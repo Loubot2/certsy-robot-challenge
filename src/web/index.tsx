@@ -6,7 +6,7 @@ import App from './App'
 import theme from './theme'
 
 const rootElement = document.getElementById('root')
-const root = ReactDOM.createRoot(rootElement)
+const root = ReactDOM.createRoot(rootElement as any)
 
 root.render(
   <ThemeProvider theme={theme}>
