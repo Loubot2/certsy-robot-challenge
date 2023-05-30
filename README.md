@@ -24,7 +24,7 @@ compile tsc
 
 Runs the app in command line
 
-## TO START UI
+## To start UI
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -33,11 +33,13 @@ Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+## To run unit tests
+
 ### `npm test`
 
 Launches the tests
 
-## to build
+## To build
 
 ### `npm run build`
 Runs webpack in production mode
